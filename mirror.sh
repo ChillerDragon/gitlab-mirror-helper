@@ -44,6 +44,7 @@ function scan_repos() {
 
 		# strip last slash
 		mirror_repo "${dir%/}"
+		sleep 3
 	done
 }
 
