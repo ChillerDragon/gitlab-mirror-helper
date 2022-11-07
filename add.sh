@@ -5,6 +5,13 @@
 MIRROR_HOST=gitlab-MIRROR
 MIRROR_HOST_HTTP=gitlab.com
 
+SCRIPT_DIR="$(dirname "$0")"
+
+function get_mapping() {
+	local github_org="$1"
+	grep "^$github_org," "$SCRIPT_DIR/mappings.csv" | cut -d',' -f2-
+}
+
 function show_help() {
 	echo "usage: add.sh GITHUB_URL"
 }
@@ -26,6 +33,15 @@ function add() {
 
 	org="${BASH_REMATCH[2]}"
 	repo="${BASH_REMATCH[3]}"
+
+	local mapping
+	mapping="$(get_mapping "$org")"
+	if [ "$mapping" != "" ]
+	then
+		echo "[*] Exception mapping '$org' -> '$mapping'"
+		org="$mapping"
+	fi
+
 	mirror_url="git@$MIRROR_HOST:$org/$repo.git"
 	mirror_url_http="https://$MIRROR_HOST_HTTP/$org/$repo"
 
