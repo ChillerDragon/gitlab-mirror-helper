@@ -7,7 +7,7 @@ I Have a ``mirror/`` folder containing this repo and all mirrors.
 It looks like this.
 
 ```
-|-- ChillerDragon
+|-- MyOrg
 |   |-- repo_a
 |   |-- repo_b
 |   `-- repo_c
@@ -20,8 +20,9 @@ It looks like this.
 To add a new mirror I goto the root of the ``mirror/`` folder and run this command:
 
 ```
-./gitlab-mirror-helper/add.sh git@github.com:ChillerDragon/repo_d.git
+./gitlab-mirror-helper/add.sh git@github.com:MyOrg/repo_d.git
 ```
 
-It assumes that I went to gitlab already and created this repo https://gitlab.com/ChillerDragon/repo_d
-It also depends on my ssh config having a host ``gitlab-MIRROR`` that is authorized to push to the repo.
+It assumes that I went to gitlab already and created this group https://gitlab.com/MyOrg
+It also depends on my ssh config having a host ``gitlab-MIRROR`` that is authorized to push to the group.
+The repository will be created by doing a ``git push``
