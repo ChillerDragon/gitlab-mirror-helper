@@ -69,7 +69,7 @@ function add() {
 
 	mkdir -p "$org"
 	cd "$org" || exit 1
-	git clone --recursive "$github_url" "$repo"
+	git clone "$github_url" "$repo"
 	cd "$repo" || exit 1
 	git remote add mirror "$mirror_url"
 
