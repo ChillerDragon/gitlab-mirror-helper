@@ -32,6 +32,7 @@ function mirror_repo() {
 	repo="${dir##*/}"
 	echo "[*] mirroring '$repo' ..."
 	git pull origin || exit 1
+	git submodule update || exit 1
 	git push mirror || exit 1
 	popd &>/dev/null || exit 1
 }
