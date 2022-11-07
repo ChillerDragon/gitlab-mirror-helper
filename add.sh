@@ -23,7 +23,7 @@ function add() {
 	local org
 	local repo
 
-	if [[ ! "$github_url" =~ ^(git@|https://)github.com[:/]([a-zA-Z0-9_-]+)/([a-zA-Z0-9_-]+)(.git)?$ ]]
+	if [[ ! "$github_url" =~ ^(git@|https://)github.com[:/]([a-zA-Z0-9_-]+)/([.a-zA-Z0-9_-]+)$ ]]
 	then
 		echo "Error: invalid github url '$github_url'"
 		echo "       only the git@github.com:org/repo.git"
@@ -33,6 +33,10 @@ function add() {
 
 	org="${BASH_REMATCH[2]}"
 	repo="${BASH_REMATCH[3]}"
+	if [[ "$repo" =~ .git$ ]]
+	then
+		repo="${repo::-4}"
+	fi
 
 	local mapping
 	mapping="$(get_mapping "$org")"
